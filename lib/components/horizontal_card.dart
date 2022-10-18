@@ -1,0 +1,52 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class horizontalCard extends StatelessWidget {
+
+  String vitalName;
+  String vitalUnits;
+  String vitalValue;
+
+  horizontalCard({required this.vitalName,required this.vitalUnits,required this.vitalValue});
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          color: Color(0xff111111),
+        ),
+        height: screenHeight*0.16,
+
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(35.0, 17.5, 20.0, 10.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+
+              Text(vitalName,style: TextStyle(fontFamily: 'Rounded',color: Colors.grey[600]),),
+              SizedBox(
+                height:(screenHeight*0.01) ,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children:  [
+                  Text( vitalValue,style: const TextStyle(fontSize: 64,color: Colors.white,fontFamily: 'Rounded'),),
+                  SizedBox(width: 5,),
+                  Text(vitalUnits,style: TextStyle(fontSize: 16,color: Colors.red,fontFamily: 'Rounded'),),
+                ],
+
+              )
+            ],
+          ),
+        ),
+
+      ),
+    );
+  }
+}
