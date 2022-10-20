@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class InoutBox extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     double buttonWidth = MediaQuery.of(context).size.width * 0.87;
@@ -17,7 +16,8 @@ class InoutBox extends StatelessWidget {
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
-            style: TextStyle(color: Colors.white,fontSize: 15,fontFamily: 'Rounded'),
+            style: TextStyle(
+                color: Colors.white, fontSize: 15, fontFamily: 'Rounded'),
             keyboardType: TextInputType.emailAddress,
             cursorColor: Color(0xff848484),
             decoration: InputDecoration(

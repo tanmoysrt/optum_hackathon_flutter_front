@@ -10,22 +10,27 @@ class verticalCard extends StatelessWidget {
   String unitsToMeasure;
   String statementToMotivate;
 
-  verticalCard(
-      {required this.vitalName,
-      required this.currentMeasurement,
-      required this.requiredMeasuremet,
-      required this.unitsMeasured,
-      required this.unitsToMeasure,
-      required this.statementToMotivate});
+  verticalCard({required this.vitalName,
+    required this.currentMeasurement,
+    required this.requiredMeasuremet,
+    required this.unitsMeasured,
+    required this.unitsToMeasure,
+    required this.statementToMotivate});
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           color: Color(0xff111111),
         ),
@@ -39,14 +44,14 @@ class verticalCard extends StatelessWidget {
               Text(
                 vitalName,
                 style:
-                    TextStyle(fontFamily: 'Rounded', color: Colors.grey[600]),
+                TextStyle(fontFamily: 'Rounded', color: Colors.grey[600]),
               ),
               SizedBox(
                 height: (screenHeight * 0.01),
               ),
               Text(
                 currentMeasurement,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 48, color: Colors.white, fontFamily: 'Rounded'),
               ),
               SizedBox(
@@ -54,7 +59,7 @@ class verticalCard extends StatelessWidget {
               ),
               Text(
                 unitsMeasured,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 16, color: Colors.white, fontFamily: 'Rounded'),
               ),
 
@@ -62,15 +67,15 @@ class verticalCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(3.0),
                 child: Container(
-                  height: screenHeight*0.11,
-                  width: screenWidth*0.15,
+                  height: screenHeight * 0.11,
+                  width: screenWidth * 0.15,
                   child: PieChart(
                     PieChartData(
-                      startDegreeOffset: 180,
-                      borderData: FlBorderData(show: false),
-                      sectionsSpace: 2,
-                      centerSpaceRadius: 15,
-                      sections: theSections()
+                        startDegreeOffset: 180,
+                        borderData: FlBorderData(show: false),
+                        sectionsSpace: 2,
+                        centerSpaceRadius: 15,
+                        sections: theSections()
                     ),
                   ),
                 ),
@@ -78,7 +83,7 @@ class verticalCard extends StatelessWidget {
 
               Text(
                 requiredMeasuremet,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 36, color: Colors.white, fontFamily: 'Rounded'),
               ),
               Text(
@@ -104,9 +109,9 @@ class verticalCard extends StatelessWidget {
   }
 }
 
-List<PieChartSectionData> theSections(){
-  return List.generate(2, (index) => PieChartSectionData(
-      color: Colors.blue,
+List<PieChartSectionData> theSections() {
+  return [PieChartSectionData(
+      color: Colors.red,
       value: 25,
       title: '',
       radius: 20,
@@ -114,8 +119,17 @@ List<PieChartSectionData> theSections(){
         fontSize: 18,
         fontWeight: FontWeight.bold,
         color: Color(0xff90672d),
-      ),
-
-
-  ));
+      ))
+  ,
+    PieChartSectionData(
+        color: Colors.grey.withOpacity(0.4),
+        value: 75,
+        title: '',
+        radius: 20,
+        titleStyle: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Color(0xff90672d),
+        ))
+  ];
 }
