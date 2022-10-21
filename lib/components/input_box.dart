@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class InputBox extends StatelessWidget {
+  final String? hintText;
+  final TextEditingController? controller;
+  final bool? obscureText;
+  final TextInputType? keyboardType;
+
+  const InputBox({super.key, this.hintText, this.controller, this.obscureText, this.keyboardType});
+
+
   @override
   Widget build(BuildContext context) {
     double buttonWidth = MediaQuery.of(context).size.width * 0.87;
@@ -13,16 +21,17 @@ class InputBox extends StatelessWidget {
         decoration: const BoxDecoration(
             color: Color(0xff1E1E1E),
             borderRadius: BorderRadius.all(Radius.circular(2))),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.0),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
-            style: TextStyle(
-                color: Colors.white, fontSize: 15, fontFamily: 'Rounded'),
-            keyboardType: TextInputType.emailAddress,
-            cursorColor: Color(0xff848484),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
+            controller: controller,
+            obscureText: obscureText ?? false,
+            keyboardType: keyboardType??TextInputType.text,
+            cursorColor: const Color(0xff848484),
             decoration: InputDecoration(
-              hintText: 'Email',
-              hintStyle: TextStyle(
+              hintText: hintText??" ",
+              hintStyle: const TextStyle(
                   color: Color(0xff848484),
                   fontStyle: FontStyle.italic
               ),
