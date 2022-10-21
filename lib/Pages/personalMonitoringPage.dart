@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:optum_hackathon/components/vertical_card.dart';
-class PersonalPage extends StatelessWidget {
+class PersonalMonitoringPage extends StatelessWidget {
 
 
   @override
