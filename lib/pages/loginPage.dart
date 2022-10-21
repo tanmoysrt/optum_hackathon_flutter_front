@@ -102,7 +102,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   height: screenHeight*0.02,
                 ),
-                buttonMulti(textInside: 'Login', onPressed: (){
+                StyledButton(textInside: 'Login', onPressed: (){
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>InitialInfopage()));
                 },),
               ],

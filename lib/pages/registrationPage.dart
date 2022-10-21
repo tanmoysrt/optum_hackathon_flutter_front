@@ -124,7 +124,7 @@ class LoginPage extends StatelessWidget {
             ),
             InkWell(
               onTap: ()=>{},
-              child: buttonMulti(textInside: 'Register '),
+              child: StyledButton(textInside: 'Register '),
             )
           ],
         )

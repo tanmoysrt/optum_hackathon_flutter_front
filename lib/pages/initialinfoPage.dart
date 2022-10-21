@@ -226,7 +226,7 @@ class InitialInfopage extends StatelessWidget {
                           ),
                           const Spacer(),
                           // Container(height: MediaQuery.of(context).size.height*0.1,),
-                          buttonMulti(textInside: "Let's go",onPressed: (){
+                          StyledButton(textInside: "Let's go",onPressed: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>const NavPage()));
                           },),
                           const SizedBox(height: 20,),

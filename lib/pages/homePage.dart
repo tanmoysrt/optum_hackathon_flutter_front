@@ -2,6 +2,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:optum_hackathon/components/alertCard.dart';
+import 'package:optum_hackathon/pages/insightsPage.dart';
 
 import '../components/vital_data_horizontal_card.dart';
 import '../components/vital_info_mini_card.dart';
@@ -38,6 +40,8 @@ class HomePage extends StatelessWidget {
                       fontSize: 18),
                 ),
                 SizedBox(height: calculatedSpacing+1),
+                AlertCard(),
+                SizedBox(height: calculatedSpacing+1,),
                 // Show heart rate
                 const VitalDataHorizontalCard(vitalName: 'Heart Rate', vitalUnits: 'bpm', vitalValue: '95', svgImage: "assets/images/heart_rate.svg",),
                 SizedBox(height: calculatedSpacing,),
@@ -46,13 +50,18 @@ class HomePage extends StatelessWidget {
                 Wrap(
                   spacing: calculatedSpacing,
                   runSpacing: calculatedSpacing,
-                  children: const[
+                  children: [
                     // spo2
-                    VitalInfoMiniCard(
-                      name: "SpO2",
-                      value: "97",
-                      units: "%",
-                      subTitle: "Avg SpO2",
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InsightsPage()));
+                      },
+                      child: VitalInfoMiniCard(
+                        name: "SpO2",
+                        value: "97",
+                        units: "%",
+                        subTitle: "Avg SpO2",
+                      ),
                     ),
                     VitalInfoMiniCard(
                       name: "Temperature",

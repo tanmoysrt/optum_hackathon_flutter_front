@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class InoutBox extends StatelessWidget {
+class InputBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double buttonWidth = MediaQuery.of(context).size.width * 0.87;
@@ -24,8 +24,8 @@ class InoutBox extends StatelessWidget {
               hintText: 'Email',
               hintStyle: TextStyle(
                   color: Color(0xff848484),
-                  fontStyle: FontStyle.italic,
-                  fontFamily: 'Rounded'),
+                  fontStyle: FontStyle.italic
+              ),
               border: InputBorder.none,
               focusColor: Colors.grey,
             ),

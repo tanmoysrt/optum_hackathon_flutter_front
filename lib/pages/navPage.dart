@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'profile.dart';
 
+import 'alertPage.dart';
 import 'personalMonitoringPage.dart';
-import 'toolsPage.dart';
 import 'homePage.dart';
 import 'insightsPage.dart';
 
@@ -16,9 +17,9 @@ class NavPageState extends State<NavPage> {
   int currentIndex=0;
   final screens = [
     HomePage(),
-    InsightsPage(),
     PersonalMonitoringPage(),
-    MenuPage(),
+    AlertPage(),
+    ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) => SafeArea(
@@ -36,9 +37,9 @@ class NavPageState extends State<NavPage> {
         unselectedItemColor: Colors.grey.withOpacity(0.4),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_rounded,), backgroundColor: Colors.red, label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.show_chart), backgroundColor: Colors.black87, label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.medical_information_rounded), backgroundColor: Colors.black87, label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.menu_rounded), backgroundColor: Colors.black87, label: "")
+          BottomNavigationBarItem(icon: Icon(Icons.monitor_heart_outlined), backgroundColor: Colors.black87, label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_none_outlined), backgroundColor: Colors.black87, label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), backgroundColor: Colors.black87, label: "")
         ],
       ),
     ),
