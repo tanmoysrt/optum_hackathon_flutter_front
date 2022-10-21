@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
 // have to use this container with inkwell to insert button functions
   @override
   Widget build(BuildContext context) {
-    // width - 0.42*2 -40
+    // width - 0.42%*2 - 40px
     double calculatedSpacing = max(MediaQuery.of(context).size.width*(1-0.42*2)-40, 0.0);
 
     return SafeArea(
