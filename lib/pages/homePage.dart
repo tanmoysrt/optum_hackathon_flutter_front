@@ -2,10 +2,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:optum_hackathon/components/button.dart';
-import 'package:optum_hackathon/components/vital_data_horizontal_card.dart';
-import 'package:optum_hackathon/components/vertical_card.dart';
 
+import '../components/vital_data_horizontal_card.dart';
 import '../components/vital_info_mini_card.dart';
 
 class HomePage extends StatelessWidget {

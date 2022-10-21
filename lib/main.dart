@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:optum_hackathon/Pages/homePage.dart';
-import 'package:optum_hackathon/Pages/insightsPage.dart';
-import 'package:optum_hackathon/Pages/personalMonitoringPage.dart';
-import 'package:optum_hackathon/Pages/toolsPage.dart';
 
-import 'Pages/navPage.dart';
+import 'pages/navPage.dart';
 
 
 void main() {
