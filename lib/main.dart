@@ -44,36 +44,31 @@ class _MyHomePageState extends State<MyHomePage> {
     InsightPage(),
   ];
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Hii Snehanjan',
-            style: TextStyle(fontSize: 36),
+  Widget build(BuildContext context) => SafeArea(
+    child: Scaffold(
+          body: screens[currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.black87,
+            currentIndex: currentIndex,
+            onTap: (index)=>setState(() {
+              currentIndex=index;
+            }),
+            iconSize: 27,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.grey.withOpacity(0.4),
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home_rounded,), label: ' ',backgroundColor: Colors.red),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.show_chart), label: ' ',backgroundColor: Colors.black87),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.medical_information_rounded),
+                  label: ' ',backgroundColor: Colors.black87),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.menu_rounded), label: ' ',backgroundColor: Colors.black87)
+            ],
           ),
-          backgroundColor: Colors.black,
         ),
-        body: screens[currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.black87,
-          currentIndex: currentIndex,
-          onTap: (index)=>setState(() {
-            currentIndex=index;
-          }),
-          iconSize: 27,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey.withOpacity(0.4),
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_rounded,), label: ' ',backgroundColor: Colors.red),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.show_chart), label: ' ',backgroundColor: Colors.black87),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.medical_information_rounded),
-                label: ' ',backgroundColor: Colors.black87),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.menu_rounded), label: ' ',backgroundColor: Colors.black87)
-          ],
-        ),
-      );
+  );
 }
