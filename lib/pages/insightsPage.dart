@@ -42,9 +42,18 @@ class _InsightsPageState extends State<InsightsPage> {
             SfCartesianChart(
                 // Initialize category axis
                 trackballBehavior: _trackballBehavior,
-                primaryXAxis: CategoryAxis(),
-                series: <LineSeries<Pair, String>>[
-                  LineSeries<Pair, String>(
+                primaryXAxis: NumericAxis(
+                  majorGridLines: const MajorGridLines(width: 0),
+                  interval: 1
+                ),
+                primaryYAxis: NumericAxis(
+                  labelFormat: '{value}%',
+                  interval: 10,
+                  majorTickLines: const MajorTickLines(size: 0),
+                ),
+                series: <SplineSeries<Pair, int>>[
+                  SplineSeries<Pair, int>(
+                    splineType: SplineType.cardinal,
                       // Bind data source
                       dataSource: <Pair>[
                         Pair(1, 15),
@@ -55,29 +64,13 @@ class _InsightsPageState extends State<InsightsPage> {
                         Pair(7, 20),
                         Pair(8, 50),
                         Pair(9, 52),
-                        Pair(10, 53),
-                        Pair(11, 55),
-                        Pair(12, 56),
-                        Pair(13, 45),
-                        Pair(14, 40),
-                        Pair(15, 15),
-                        Pair(16, 7),
-                        Pair(17, 20),
-                        Pair(18, 30),
-                        Pair(19, 35),
-                        Pair(20, 20),
-                        Pair(21, 50),
-                        Pair(22, 52),
-                        Pair(23, 53),
-                        Pair(24, 55),
-                        Pair(25, 56),
-                        Pair(26, 45),
-                        Pair(27, 40),
+                        Pair(10, 53)
                       ],
                       enableTooltip: true,
-                      xValueMapper: (Pair tmp, _) => tmp.x.toString(),
+                      width: 3,
+                      xValueMapper: (Pair tmp, _) => tmp.x,
                       yValueMapper: (Pair tmp, _) => tmp.y,
-                      dataLabelSettings: const DataLabelSettings(isVisible: true))
+                  )
                 ])
           ])),
     ));
