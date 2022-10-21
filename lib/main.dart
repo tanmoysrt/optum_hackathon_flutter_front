@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optum_hackathon/pages/loginPage.dart';
 
 import 'pages/navPage.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black,
         brightness: Brightness.dark,
       ),
-      home: NavPage(),
+      home: LoginPage(),
     );
   }
 }
