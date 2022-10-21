@@ -1,18 +1,12 @@
-
 import 'package:flutter/material.dart';
+ class InsightsPage extends StatelessWidget {
 
-class InsightPage extends StatelessWidget {
 
+   @override
+   Widget build(BuildContext context) {
+     return Container(
+       child :Text('This is the insights page',style: TextStyle(color: Colors.white),),
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-          child: Text(
-            "This is the insights page",
-            style:
-            TextStyle(fontFamily: 'Rounded', fontSize: 60, color: Colors.white),
-          )),
-    );
-  }
-}
+     );
+   }
+ }

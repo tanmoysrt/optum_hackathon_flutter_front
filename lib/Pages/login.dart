@@ -91,7 +91,10 @@ class LoginPage extends StatelessWidget {
           SizedBox(
             height: screenHeight*0.02,
           ),
-          buttonMulti(textInside: 'Login')
+          InkWell(
+            onTap: ()=>{},
+            child: buttonMulti(textInside: 'Login'),
+          )
         ],
       )
     );

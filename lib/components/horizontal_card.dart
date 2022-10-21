@@ -13,11 +13,11 @@ class horizontalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.only(left: 15.0,right: 15.0,bottom: 7.5,top: 15.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
-          color: Color(0xff111111),
+          color: Color(0xff0D0D0D),
         ),
         height: screenHeight*0.16,
 

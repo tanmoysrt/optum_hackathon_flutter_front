@@ -15,7 +15,7 @@ class verticalCard extends StatelessWidget {
     required this.requiredMeasuremet,
     required this.unitsMeasured,
     required this.unitsToMeasure,
-    required this.statementToMotivate});
+    required this.statementToMotivate,});
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +28,16 @@ class verticalCard extends StatelessWidget {
         .size
         .width;
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(5.0),
       child: Container(
+
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
-          color: Color(0xff111111),
+          color: Color(0xff0D0D0D)
+
         ),
-        height: screenHeight * 0.4,
-        width: screenWidth * 0.41,
+        height: screenHeight * 0.415,
+        width: screenWidth * 0.44,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -59,8 +61,8 @@ class verticalCard extends StatelessWidget {
               ),
               Text(
                 unitsMeasured,
-                style: const TextStyle(
-                    fontSize: 16, color: Colors.white, fontFamily: 'Rounded'),
+                style:  TextStyle(
+                    fontSize: 16, color: Colors.white.withOpacity(0.8), fontFamily: 'Rounded'),
               ),
 
               //place for the graph
@@ -89,7 +91,7 @@ class verticalCard extends StatelessWidget {
               Text(
                 unitsToMeasure,
                 style: TextStyle(
-                    fontSize: 16, color: Colors.white, fontFamily: 'Rounded'),
+                    fontSize: 16, color: Colors.white.withOpacity(0.8), fontFamily: 'Rounded'),
               ),
               SizedBox(
                 height: (screenHeight * 0.005),

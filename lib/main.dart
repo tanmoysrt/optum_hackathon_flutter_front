@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:optum_hackathon/Pages/home.dart';
 import 'package:optum_hackathon/Pages/insights.dart';
-import 'package:optum_hackathon/Pages/menu.dart';
-import 'package:optum_hackathon/Pages/personalized.dart';
+import 'package:optum_hackathon/Pages/personal.dart';
+import 'package:optum_hackathon/Pages/tools.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -39,9 +40,12 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentIndex=0;
   final screens = [
     HomePage(),
-    PersonalizedPage(),
+    InsightsPage(),
+    PersonalPage(),
     MenuPage(),
-    InsightPage(),
+
+
+
   ];
   @override
   Widget build(BuildContext context) => SafeArea(

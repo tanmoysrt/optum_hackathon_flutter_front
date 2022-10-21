@@ -9,7 +9,7 @@ class squareButton extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(12)),
-        color: Color(0xff111111),
+        color: Color(0xff0D0D0D)
       ),
       height: screenHeight * 0.4,
       width: screenWidth * 0.205,
