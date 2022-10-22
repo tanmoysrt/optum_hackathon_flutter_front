@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:optum_hackathon/domain/models/detectionHistory.dart';
 import 'package:optum_hackathon/presentation/components/button.dart';
 
 class AlertCard extends StatelessWidget {
+  final DetectionHistory detectionHistory;
+  final Function onClickResolve;
 
-
-  const AlertCard({super.key});
+  const AlertCard({super.key, required this.detectionHistory, required this.onClickResolve});
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +23,27 @@ class AlertCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Heart Failure", textScaleFactor: 1.5,),
+           detectionHistory.disease != null ? Text(detectionHistory.disease??"", textScaleFactor: 1.5,) : const SizedBox.shrink(),
           const SizedBox(height: 10),
-          SvgPicture.asset("assets/images/medium_risk.svg"),
+          SvgPicture.asset(
+              detectionHistory.riskLevel == "high" ? "assets/images/high_risk.svg"
+              : detectionHistory.riskLevel == "medium"
+              ? "assets/images/medium_risk.svg"
+              : "assets/images/low_risk.svg"),
           const SizedBox(height: 15,),
           FractionallySizedBox(
             widthFactor: 0.9,
-            child: Text("This is the main cause of tthe alert messages.So be prepared to die", textScaleFactor: 1.2, textAlign: TextAlign.center,)
+            child: Text(detectionHistory.cause, textScaleFactor: 1.2, textAlign: TextAlign.center,)
           ),
           const SizedBox(height: 20,),
           FractionallySizedBox(
-            widthFactor: 0.9,
-            child: Text("Reported by : Heart Rate Predictor", textScaleFactor: 1, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade400),)
+            widthFactor: 0.95,
+            child: Text("Reported by : ${detectionHistory.reoprtedByName}", textScaleFactor: 1, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade400),)
           ),
           const SizedBox(height: 2,),
           FractionallySizedBox(
               widthFactor: 0.9,
-              child: Text("Detected On : 22:55 , 21 Jun 2022", textScaleFactor: 1, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade400),)
+              child: Text("Detected On : ${detectionHistory.toFormattedDateTime()}", textScaleFactor: 1, textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade400),)
           ),
           const SizedBox(height: 20,),
           Row(
@@ -45,7 +51,7 @@ class AlertCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              StyledButton(textInside: "Mark as resolved", fractionalWidth: 0.38, fractionalHeight: 0.05, bgColor: Color(0xFF2E7A00),textSize: 12,),
+              StyledButton(textInside: "Mark as resolved", fractionalWidth: 0.38, fractionalHeight: 0.05, bgColor: const Color(0xFF2E7A00),textSize: 12,onPressed: ()=>onClickResolve(),),
               StyledButton(textInside: "Consult Specialist", fractionalWidth: 0.38, fractionalHeight: 0.05, bgColor: Color(0xFF004A7F), textSize: 12,),
             ],
           )

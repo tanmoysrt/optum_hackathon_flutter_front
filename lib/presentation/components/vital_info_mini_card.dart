@@ -24,7 +24,7 @@ class VitalInfoMiniCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(name,style: TextStyle(color: Colors.grey[600]), textScaleFactor: 1.15,),
+            Text(name,style: TextStyle(color: Colors.grey[600]), textScaleFactor: 1.15, overflow: TextOverflow.fade, softWrap: false,),
             const SizedBox(height: 5),
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -37,7 +37,7 @@ class VitalInfoMiniCard extends StatelessWidget {
               ],
             ),
             const  SizedBox(height: 5, ),
-            Text(subTitle ,style: const TextStyle(fontSize: 12,color: Color(0xffA0A0A0)), textScaleFactor: 1.1),
+            Text(subTitle ,style: const TextStyle(fontSize: 12,color: Color(0xffA0A0A0)), textScaleFactor: 1.1, overflow: TextOverflow.fade, softWrap: false,),
           ],
         ),
       ),

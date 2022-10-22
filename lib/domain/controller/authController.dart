@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
+import '../../presentation/pages/fetchingVitalsDatabase.dart';
 import '../../presentation/pages/navPage.dart';
 import '../../presentation/pages/registrationPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,7 +49,7 @@ class AuthController extends GetxController {
 
     if (isLoggedIn) {
       _restAPI.setApiKey(token);
-      Get.offAll(NavPage());
+      Get.offAll(FetchingVitalsDatabasePage());
     } else {
       emailController = TextEditingController();
       passwordController = TextEditingController();
@@ -75,7 +76,7 @@ class AuthController extends GetxController {
       _restAPI.setApiKey(response.payload["token"]);
       await _prefs.setString("token", response.payload["token"]);
       await _prefs.setString("name", response.payload["name"]);
-      await Get.offAll(NavPage());
+      await Get.offAll(()=>FetchingVitalsDatabasePage());
       emailController!.dispose();
       passwordController!.dispose();
     }
@@ -156,7 +157,7 @@ class AuthController extends GetxController {
       _restAPI.setApiKey(response.payload["token"]);
       await _prefs.setString("token", response.payload["token"]);
       await _prefs.setString("name", response.payload["name"]);
-      await Get.offAll(NavPage());
+      await Get.offAll(()=>FetchingVitalsDatabasePage());
       emailController!.dispose();
       passwordController!.dispose();
       nameController!.dispose();

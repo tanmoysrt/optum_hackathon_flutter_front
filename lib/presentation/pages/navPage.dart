@@ -17,7 +17,6 @@ class NavPage extends StatefulWidget {
 class NavPageState extends State<NavPage> {
   @override
   void initState() {
-    Get.put(GlobalController(), permanent: true);
     super.initState();
   }
   int currentIndex=0;

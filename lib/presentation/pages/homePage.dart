@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
     // width - 0.42%*2 - 40px
     double calculatedSpacing = max(MediaQuery.of(context).size.width*(1-0.42*2)-40, 0.0);
 
-    return GetX<GlobalController>(
+    return GetBuilder<GlobalController>(
       builder: (controller) {
         return SafeArea(
           child: Scaffold(
@@ -44,10 +44,15 @@ class HomePage extends StatelessWidget {
                           fontSize: 18),
                     ),
                     SizedBox(height: calculatedSpacing+1),
-                    AlertCard(),
+                    controller.detectionHistories.isEmpty
+                        ? const SizedBox()
+                        : AlertCard(
+                            detectionHistory: controller.detectionHistories.first,
+                            onClickResolve: ()=>controller.markDetectionHistoryAsResolved(controller.detectionHistories.first.id),
+                          ),
                     SizedBox(height: calculatedSpacing+1,),
                     // Show heart rate
-                    const VitalDataHorizontalCard(vitalName: 'Heart Rate', vitalUnits: 'bpm', vitalValue: '95', svgImage: "assets/images/heart_rate.svg",),
+                    VitalDataHorizontalCard(vitalName: 'Heart Rate', vitalUnits: 'bpm', vitalValue: controller.getVitalValue("hr"), svgImage: "assets/images/heart_rate.svg",),
                     SizedBox(height: calculatedSpacing,),
                     // Show steps
     
@@ -62,30 +67,39 @@ class HomePage extends StatelessWidget {
                           },
                           child: VitalInfoMiniCard(
                             name: "SpO2",
-                            value: "97",
+                            value: controller.getVitalValue("spo2"),
                             units: "%",
                             subTitle: "Avg SpO2",
                           ),
                         ),
                         VitalInfoMiniCard(
                           name: "Temperature",
-                          value: "98",
+                          value: controller.getVitalValue("temperature"),
                           units: "°F",
                           subTitle: "Body Temperature",
                         ),
                         VitalInfoMiniCard(
                           name: "Steps",
-                          value: "2.5k",
+                          value: controller.getVitalValue("steps_walked"),
                           units: "",
                           subTitle: "Total Steps",
                         ),
                         VitalInfoMiniCard(
                           name: "Calorie",
-                          value: "15",
-                          units: "kcal",
+                          value: controller.getVitalValue("calorie"),
+                          units: "cal",
                           unitsColor: Colors.amber,
-                          subTitle: "Total Clories Burnt",
+                          subTitle: "Total Calories Burnt",
                         ),
+                        ...controller.vitalsInfo.where((p0) => p0.code != "hr" && p0.code != "spo2"  && p0.code != "temperature"  && p0.code != "steps_walked"  && p0.code != "calorie").map((element){
+                          return
+                          VitalInfoMiniCard(
+                            name: element.name,
+                            value: controller.getVitalValue(element.code),
+                            units: element.unit,
+                            subTitle: "Latest ${element.name}",
+                          );
+                        }).toList()
                       ],
                     ),
                     //Steps vertical card
