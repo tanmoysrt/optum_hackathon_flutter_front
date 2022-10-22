@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
-import 'package:optum_hackathon/presentation/pages/navPage.dart';
-import 'package:optum_hackathon/presentation/pages/registrationPage.dart';
+import '../../presentation/pages/navPage.dart';
+import '../../presentation/pages/registrationPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../presentation/pages/loginPage.dart';

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:optum_hackathon/domain/controller/globalController.dart';
 import 'profile.dart';
 
 import 'alertPage.dart';
 import 'personalMonitoringPage.dart';
 import 'homePage.dart';
-import 'insightsPage.dart';
 
 class NavPage extends StatefulWidget {
   const NavPage({Key? key}) : super(key: key);
@@ -14,6 +15,11 @@ class NavPage extends StatefulWidget {
 }
 
 class NavPageState extends State<NavPage> {
+  @override
+  void initState() {
+    Get.put(GlobalController(), permanent: true);
+    super.initState();
+  }
   int currentIndex=0;
   final screens = [
     HomePage(),
