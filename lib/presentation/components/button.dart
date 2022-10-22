@@ -9,7 +9,8 @@ class StyledButton extends StatelessWidget {
   final double? fractionalWidth;
   final double? fractionalHeight;
   final double? textSize;
-  const StyledButton({super.key, required this.textInside, this.onPressed, this.bgColor, this.textColor, this.fractionalWidth, this.fractionalHeight, this.textSize});
+  final bool outlined;
+  const StyledButton({super.key, required this.textInside, this.onPressed, this.bgColor, this.textColor, this.fractionalWidth, this.fractionalHeight, this.textSize, this.outlined=false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,8 @@ class StyledButton extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(2),),
-          color: bgColor??const Color(0xff4081FF),
+          color:  outlined ? Colors.transparent : (bgColor??const Color(0xff4081FF)),
+          border: Border.all(color: outlined ? (bgColor??const Color(0xff4081FF)) : Colors.transparent, width: 1),
         ),
 
         height: buttonHeight,

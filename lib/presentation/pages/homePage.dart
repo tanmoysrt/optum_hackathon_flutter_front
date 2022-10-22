@@ -2,8 +2,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:optum_hackathon/components/alertCard.dart';
-import 'package:optum_hackathon/pages/insightsPage.dart';
+import 'package:optum_hackathon/presentation/components/alertCard.dart';
+import 'package:optum_hackathon/presentation/pages/insightsPage.dart';
 
 import '../components/vital_data_horizontal_card.dart';
 import '../components/vital_info_mini_card.dart';

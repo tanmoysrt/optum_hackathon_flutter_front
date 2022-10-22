@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:optum_hackathon/components/button.dart';
+import 'package:optum_hackathon/presentation/components/button.dart';
 
 class AlertCard extends StatelessWidget {
 

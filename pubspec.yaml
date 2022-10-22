@@ -37,6 +37,9 @@ dependencies:
   flutter_svg: ^1.1.5
   widget_mask: ^1.0.0+0
   syncfusion_flutter_charts: ^20.3.50
+  http: ^0.13.5
+  get: ^4.6.5
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
