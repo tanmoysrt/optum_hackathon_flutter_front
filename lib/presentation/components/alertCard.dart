@@ -51,7 +51,7 @@ class AlertCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              StyledButton(textInside: "Mark as resolved", fractionalWidth: 0.38, fractionalHeight: 0.05, bgColor: const Color(0xFF2E7A00),textSize: 12,onPressed: ()=>onClickResolve(),),
+              StyledButton(textInside: "Mark as resolved", fractionalWidth: 0.38, fractionalHeight: 0.05, bgColor: const Color(0xFF2E7A00),textSize: 12,onPressed: ()=>onClickResolve(detectionHistory.id),),
               StyledButton(textInside: "Consult Specialist", fractionalWidth: 0.38, fractionalHeight: 0.05, bgColor: Color(0xFF004A7F), textSize: 12,),
             ],
           )

@@ -13,6 +13,8 @@ import '../components/vital_info_mini_card.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
+
+
 // have to use this container with inkwell to insert button functions
   @override
   Widget build(BuildContext context) {
@@ -44,11 +46,11 @@ class HomePage extends StatelessWidget {
                           fontSize: 18),
                     ),
                     SizedBox(height: calculatedSpacing+1),
-                    controller.detectionHistories.isEmpty
+                    controller.detectionHistories.where((p0) => !p0.resolved).isEmpty
                         ? const SizedBox()
                         : AlertCard(
-                            detectionHistory: controller.detectionHistories.first,
-                            onClickResolve: ()=>controller.markDetectionHistoryAsResolved(controller.detectionHistories.first.id),
+                            detectionHistory: controller.detectionHistories.where((p0) => !p0.resolved).first,
+                            onClickResolve: (id)=>controller.markDetectionHistoryAsResolved(id),
                           ),
                     SizedBox(height: calculatedSpacing+1,),
                     // Show heart rate
