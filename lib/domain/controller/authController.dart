@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -67,9 +68,15 @@ class AuthController extends GetxController {
     }
     // Requesting
     isRequesting.value = true;
+    // Fetch token
+    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+    String ? fcmToken = await firebaseMessaging.getToken();
     // Login
-    var response = await _restAPI.post("/auth/login", {},
-        {"email": emailController!.text, "password": passwordController!.text});
+    var response = await _restAPI.post("/auth/login", {}, {
+      "email": emailController!.text,
+      "password": passwordController!.text,
+      "fcmToken": fcmToken
+    });
     // If successful, set token and move to homepage , also dispose editingcontrollers
     if(response.success){
       Get.snackbar("Hurray ! 🎉🎉", "You have been logged in");
@@ -139,7 +146,9 @@ class AuthController extends GetxController {
 
     // Requesting
     isRequesting.value = true;
-
+    // Fetch token
+    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+    String ? fcmToken = await firebaseMessaging.getToken();
     // Register
     var response = await _restAPI.post("/auth/register", {}, {
       "name" : nameController!.text,
@@ -149,7 +158,8 @@ class AuthController extends GetxController {
       "gender" : gender,
       "weight" : double.parse(weightController!.text),
       "height" : double.parse(heightController!.text),
-      "bloodGroup" : bloodGroup
+      "bloodGroup" : bloodGroup,
+      "fcmToken" : fcmToken
     });
 
     if(response.success){

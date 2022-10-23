@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "744642209859",
+    "project_id": "optum-monitoring-app",
+    "storage_bucket": "optum-monitoring-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744642209859:android:dbffcaf9258b96155c0cf6",
+        "android_client_info": {
+          "package_name": "com.crazydev.patient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744642209859-h2q5375qnrh8mso0fvkf4bhibh6cnv5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGUS1lb_9ZmHqSVokdMm2t6htvLzxzOjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744642209859-h2q5375qnrh8mso0fvkf4bhibh6cnv5c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
