@@ -5,7 +5,7 @@ class DetectionHistory {
   final String reoprtedByName;
   final String cause;
   final String riskLevel;
-  final bool resolved;
+  bool resolved;
   final String ? disease;
   final int detectedOn;
 
@@ -41,6 +41,6 @@ class DetectionHistory {
       };
 
   String toFormattedDateTime(){
-    return DateFormat("dd MMM yyyy hh:mm a").format(DateTime.fromMillisecondsSinceEpoch(detectedOn));
+    return DateFormat("HH:mm, dd-MM-yyyy").format(DateTime.fromMillisecondsSinceEpoch(detectedOn));
   }
 }

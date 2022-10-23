@@ -52,6 +52,7 @@ class GlobalController extends GetxController{
   Future<void> fetchVitalsInfo()async{
     var response = await _restAPI.get("/patient/vitals/fetch/info", {});
     if(response.success){
+      vitalsInfo.clear();
       vitalsInfo.addAll((response.payload as List).map((e) => VitalInfo.fromJson(e)).toList());
       Get.offAll(()=>const NavPage());
     }else{
@@ -62,6 +63,7 @@ class GlobalController extends GetxController{
   Future<void> fetchDetectionHistories()async{
     var response = await _restAPI.get("/patient/detection/history", {});
     if(response.success){
+      detectionHistories.clear();
       detectionHistories.addAll((response.payload as List).map((e) => DetectionHistory.fromJson(e)).toList());
       update();
     }else{
@@ -74,8 +76,11 @@ class GlobalController extends GetxController{
       "id" : id
     });
     if(response.success){
-      detectionHistories.removeWhere((element) => element.id == id);
-      update();
+      DetectionHistory? histoy= detectionHistories.firstWhereOrNull((element) => element.id == id);
+      if(histoy != null){
+        histoy.resolved = true;
+        update();
+      }
     }else{
       Get.snackbar("Failed to resolve detection history", "Restart app", backgroundColor: Colors.redAccent.shade400 );
     }

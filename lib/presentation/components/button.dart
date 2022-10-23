@@ -17,6 +17,7 @@ class StyledButton extends StatelessWidget {
     double buttonWidth = MediaQuery.of(context).size.width*(fractionalWidth??0.87);
     double buttonHeight = MediaQuery.of(context).size.height*(fractionalHeight??0.06);
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: onPressed == null ? (){} : ()=>onPressed!(),
       child: Container(
         decoration: BoxDecoration(
