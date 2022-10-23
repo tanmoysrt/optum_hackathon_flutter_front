@@ -54,7 +54,12 @@ class HomePage extends StatelessWidget {
                           ),
                     SizedBox(height: calculatedSpacing+1,),
                     // Show heart rate
-                    VitalDataHorizontalCard(vitalName: 'Heart Rate', vitalUnits: 'bpm', vitalValue: controller.getVitalValue("hr"), svgImage: "assets/images/heart_rate.svg",),
+                    GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const InsightsPage(vitalCode: "hr", vitalName: "Heart Rate",)));
+                        },
+                        child: VitalDataHorizontalCard(vitalName: 'Heart Rate', vitalUnits: 'bpm', vitalValue: controller.getVitalValue("hr"), svgImage: "assets/images/heart_rate.svg",)
+                    ),
                     SizedBox(height: calculatedSpacing,),
                     // Show steps
     
@@ -65,7 +70,7 @@ class HomePage extends StatelessWidget {
                         // spo2
                         GestureDetector(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>InsightsPage()));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const InsightsPage(vitalCode: "spo2", vitalName: "SpO2",)));
                           },
                           child: VitalInfoMiniCard(
                             name: "SpO2",
@@ -74,32 +79,52 @@ class HomePage extends StatelessWidget {
                             subTitle: "Avg SpO2",
                           ),
                         ),
-                        VitalInfoMiniCard(
-                          name: "Temperature",
-                          value: controller.getVitalValue("temperature"),
-                          units: "°F",
-                          subTitle: "Body Temperature",
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const InsightsPage(vitalCode: "temperature", vitalName: "Body Temperature")));
+                          },
+                          child: VitalInfoMiniCard(
+                            name: "Temperature",
+                            value: controller.getVitalValue("temperature"),
+                            units: "°F",
+                            subTitle: "Body Temperature",
+                          ),
                         ),
-                        VitalInfoMiniCard(
-                          name: "Steps",
-                          value: controller.getVitalValue("steps_walked"),
-                          units: "",
-                          subTitle: "Total Steps",
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const InsightsPage(vitalCode: "steps_walked" , vitalName: "Steps Walked")));
+                          },
+                          child: VitalInfoMiniCard(
+                            name: "Steps",
+                            value: controller.getVitalValue("steps_walked"),
+                            units: "",
+                            subTitle: "Total Steps",
+                          ),
                         ),
-                        VitalInfoMiniCard(
-                          name: "Calorie",
-                          value: controller.getVitalValue("calorie"),
-                          units: "cal",
-                          unitsColor: Colors.amber,
-                          subTitle: "Total Calories Burnt",
+                        GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const InsightsPage(vitalCode: "calorie", vitalName: "Calorie Burnt")));
+                          },
+                          child: VitalInfoMiniCard(
+                            name: "Calorie",
+                            value: controller.getVitalValue("calorie"),
+                            units: "cal",
+                            unitsColor: Colors.amber,
+                            subTitle: "Total Calories Burnt",
+                          ),
                         ),
                         ...controller.vitalsInfo.where((p0) => p0.code != "hr" && p0.code != "spo2"  && p0.code != "temperature"  && p0.code != "steps_walked"  && p0.code != "calorie").map((element){
                           return
-                          VitalInfoMiniCard(
-                            name: element.name,
-                            value: controller.getVitalValue(element.code),
-                            units: element.unit,
-                            subTitle: "Latest ${element.name}",
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=> InsightsPage(vitalCode: element.code,  vitalName: element.name)));
+                            },
+                            child: VitalInfoMiniCard(
+                              name: element.name,
+                              value: controller.getVitalValue(element.code),
+                              units: element.unit,
+                              subTitle: "Latest ${element.name}",
+                            ),
                           );
                         }).toList()
                       ],

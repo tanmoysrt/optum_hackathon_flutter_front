@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:optum_hackathon/domain/models/insightsData.dart';
 import 'package:optum_hackathon/domain/models/personalizedMonitoring.dart';
 import 'package:optum_hackathon/presentation/pages/navPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +24,10 @@ class GlobalController extends GetxController{
   RxList<PersonalizedMonitoringRecord> personalizedMonitoringRecords = RxList.empty();
   Map<String, VitalData> latestVitals = {};
 
+  RxList<VitalInsight> insights = RxList.empty();
+
   RxBool loadingPersonalizedRecords = false.obs;
+  RxBool loadingVitalsInsightsData = false.obs;
 
 
   GlobalController(){
@@ -35,8 +39,8 @@ class GlobalController extends GetxController{
       fetchLatestVitalData()
     })
     .then((value) => {
-      Timer.periodic(const Duration(seconds: 5), (Timer t) => fetchLatestVitalData()),
-      Timer.periodic(const Duration(seconds: 10), (Timer t) => fetchDetectionHistories())
+      Timer.periodic(const Duration(seconds: 50), (Timer t) => fetchLatestVitalData()),
+      Timer.periodic(const Duration(seconds: 100), (Timer t) => fetchDetectionHistories())
     });
   }
 
@@ -127,5 +131,18 @@ class GlobalController extends GetxController{
     loadingPersonalizedRecords.value = false;
   }
 
-
+  Future<void> fetchOldVitalsRecords(String vitalCode)async {
+    loadingVitalsInsightsData.value = true;
+    var response = await _restAPI.get("/patient/vitals/fetch/data/old/$vitalCode", {
+      "p" : "200"
+    });
+    if (response.success) {
+      insights.clear();
+      insights.addAll((response.payload as List).map((e) => VitalInsight.fromJson(e)).toList());
+      update();
+    } else {
+      Get.snackbar("Failed to load detection history", "Restart app",backgroundColor: Colors.redAccent.shade400);
+    }
+    loadingVitalsInsightsData.value = false;
+  }
 }
