@@ -21,8 +21,9 @@ class GlobalController extends GetxController{
   RxList<VitalInfo> vitalsInfo = RxList.empty();
   RxList<DetectionHistory> detectionHistories = RxList.empty();
   RxList<PersonalizedMonitoringRecord> personalizedMonitoringRecords = RxList.empty();
-
   Map<String, VitalData> latestVitals = {};
+
+  RxBool loadingPersonalizedRecords = false.obs;
 
 
   GlobalController(){
@@ -114,6 +115,7 @@ class GlobalController extends GetxController{
 
 
   Future<void> fetchPersonalizedMonitoringRecords()async{
+    loadingPersonalizedRecords.value = true;
     var response = await _restAPI.get("/patient/monitoring/records/all", {});
     if(response.success){
       personalizedMonitoringRecords.clear();
@@ -122,6 +124,7 @@ class GlobalController extends GetxController{
     }else{
       Get.snackbar("Failed to load detection history", "Restart app", backgroundColor: Colors.redAccent.shade400 );
     }
+    loadingPersonalizedRecords.value = false;
   }
 
 

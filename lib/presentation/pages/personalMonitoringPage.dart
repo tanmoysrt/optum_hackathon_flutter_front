@@ -38,15 +38,22 @@ class _PersonalMonitoringPageState extends State<PersonalMonitoringPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            Text(
-                              'Hii ${controller.name.value}',
-                              style: const TextStyle(color: Colors.white),
-                              textScaleFactor: 2.5,
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'This is your personalized monitoring',
-                              style: TextStyle(color: Colors.grey[600], fontSize: 18),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title:Text(
+                                'Hii ${controller.name.value}',
+                                style: const TextStyle(color: Colors.white),
+                                textScaleFactor: 2,
+                              ),
+                              subtitle: Text(
+                                'Your personalized monitoring records',
+                                style: TextStyle(color: Colors.grey[600], fontSize: 18)
+                              ),
+                              trailing: Obx(() => controller.loadingPersonalizedRecords.value ? CircularProgressIndicator(
+                                    color: Colors.green,
+                                    backgroundColor: Colors.grey[600],
+                                  ) : const SizedBox.shrink()
+                              ),
                             ),
                             const SizedBox(height: 50),
                             ...controller.personalizedMonitoringRecords.map((record) => _personalizedMonitoringCard(context, record)).toList()
