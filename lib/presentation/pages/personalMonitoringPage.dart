@@ -1,56 +1,78 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:optum_hackathon/domain/controller/globalController.dart';
+import 'package:optum_hackathon/domain/models/personalizedMonitoring.dart';
 
 import '../components/dynamic_icons.dart';
 
-class PersonalMonitoringPage extends StatelessWidget {
+class PersonalMonitoringPage extends StatefulWidget {
   const PersonalMonitoringPage({Key? key}) : super(key: key);
 
   @override
+  State<PersonalMonitoringPage> createState() => _PersonalMonitoringPageState();
+}
+
+class _PersonalMonitoringPageState extends State<PersonalMonitoringPage> {
+  final GlobalController _globalController = Get.find<GlobalController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _globalController.fetchPersonalizedMonitoringRecords();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: SingleChildScrollView(
-              child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  color: Colors.black,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 10),
-                        const Text(
-                          'Hii Snehanjan',
-                          style: TextStyle(color: Colors.white),
-                          textScaleFactor: 2.5,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'This is your personalized monitoring',
-                          style: TextStyle(color: Colors.grey[600], fontSize: 18),
-                        ),
-                        const SizedBox(height: 50),
-                        _personalizedMonitoringCard(context),
-                        _personalizedMonitoringCard(context)
-                      ]
-                  )
-              ),
+
+    return GetBuilder<GlobalController>(
+      builder: (controller) {
+        return SafeArea(
+            child: Scaffold(
+                body: SingleChildScrollView(
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      color: Colors.black,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10),
+                            Text(
+                              'Hii ${controller.name.value}',
+                              style: const TextStyle(color: Colors.white),
+                              textScaleFactor: 2.5,
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              'This is your personalized monitoring',
+                              style: TextStyle(color: Colors.grey[600], fontSize: 18),
+                            ),
+                            const SizedBox(height: 50),
+                            ...controller.personalizedMonitoringRecords.map((record) => _personalizedMonitoringCard(context, record)).toList()
+                          ]
+                      )
+                  ),
+                )
             )
-        )
+        );
+      }
     );
   }
 }
 
 
-Widget _personalizedMonitoringCard(BuildContext context){
+Widget _personalizedMonitoringCard(BuildContext context, PersonalizedMonitoringRecord personalizedMonitoringRecord) {
   List<String> vitalsMonitoring = ["Heart Rate", "Steps", "SpO2", "BP"];
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       ListTile(
         contentPadding: EdgeInsets.zero,
-        title: Text('Heart Failure Monitoring',
+        title: Text(personalizedMonitoringRecord.name,
           style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 22),
         ),
-        subtitle: Text('By Dr Alpha',
+        subtitle: Text('By ${personalizedMonitoringRecord.assigneeType == "doctor" ?  personalizedMonitoringRecord.doctorName : "you"}',
           style: TextStyle(color: Colors.white.withOpacity(0.6), fontSize: 16),
         )
       ),
@@ -58,12 +80,12 @@ Widget _personalizedMonitoringCard(BuildContext context){
       const SizedBox(height: 5,),
       Wrap(
         spacing: 5,
-        children: vitalsMonitoring.map((e) => Chip(label: Text(e), visualDensity: VisualDensity.compact,)).toList(),
+        children: personalizedMonitoringRecord.vitalThreshold.map((e) => Chip(label: Text(e.vital.name), visualDensity: VisualDensity.compact,)).toList(),
       ),
-      const SizedBox(height: 10,),
-      _calorieTargetCard(context, 200, 50),
-      const SizedBox(height: 10,),
-      _footstepsTargetCard(context, 2000, 750),
+      personalizedMonitoringRecord.isMonitorCalorieCount ? const SizedBox(height: 10,) : const SizedBox.shrink(),
+      personalizedMonitoringRecord.isMonitorCalorieCount ? _calorieTargetCard(context, personalizedMonitoringRecord.minCalorieCount, personalizedMonitoringRecord.currentCalories) : const SizedBox.shrink(),
+      personalizedMonitoringRecord.isMonitorStepCount ? const SizedBox(height: 10,) : const SizedBox.shrink(),
+      personalizedMonitoringRecord.isMonitorStepCount ? _footstepsTargetCard(context, personalizedMonitoringRecord.minStepCount, personalizedMonitoringRecord.currentSteps) : const SizedBox.shrink(),
       const Divider(height: 40,),
     ],
   );
@@ -107,7 +129,7 @@ Widget _calorieTargetCard(BuildContext context, int target, int done){
                     Text(done.toString(),style: const TextStyle(fontSize: 45,color: Colors.white)),
                     const SizedBox(width: 5,),
                     // unit
-                    const Text("kcal",style: TextStyle(fontSize: 16,color: Color(0xFFFFB800))),
+                    const Text("cal",style: TextStyle(fontSize: 16,color: Color(0xFFFFB800))),
                   ],
                 ),
                 // label
@@ -127,7 +149,7 @@ Widget _calorieTargetCard(BuildContext context, int target, int done){
                   textBaseline: TextBaseline.alphabetic,
                   children:  [
                     // value
-                    Text((target-done).toString(),style: const TextStyle(fontSize: 21,color: Colors.white)),
+                    Text((max(target-done, 0)).toString(),style: const TextStyle(fontSize: 21,color: Colors.white)),
                     const SizedBox(width: 5,),
                     // unit
                     Text("kcal",style: TextStyle(fontSize: 16,color: Colors.grey.shade600)),
@@ -204,7 +226,7 @@ Widget _footstepsTargetCard(BuildContext context, int target, int done){
                   textBaseline: TextBaseline.alphabetic,
                   children:  [
                     // value
-                    Text((target-done).toString(),style: const TextStyle(fontSize: 21,color: Colors.white)),
+                    Text((max(target-done,0)).toString(),style: const TextStyle(fontSize: 21,color: Colors.white)),
                     const SizedBox(width: 5,),
                     // unit
                     Text("steps",style: TextStyle(fontSize: 16,color: Colors.grey.shade600)),

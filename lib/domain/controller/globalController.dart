@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:optum_hackathon/domain/models/personalizedMonitoring.dart';
 import 'package:optum_hackathon/presentation/pages/navPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,6 +20,7 @@ class GlobalController extends GetxController{
   RxString name = "".obs;
   RxList<VitalInfo> vitalsInfo = RxList.empty();
   RxList<DetectionHistory> detectionHistories = RxList.empty();
+  RxList<PersonalizedMonitoringRecord> personalizedMonitoringRecords = RxList.empty();
 
   Map<String, VitalData> latestVitals = {};
 
@@ -95,15 +97,27 @@ class GlobalController extends GetxController{
       if(value == -1){
         return "-";
       }
-      if(value >= 1000)
-        return (value/1000).toStringAsFixed(0) + "k";
-      else
+      if(value >= 1000) {
+        return "${(value/1000).toStringAsFixed(0)}k";
+      } else {
         return value.toStringAsFixed(0);
+      }
     }else{
       return "--";
     }
   }
 
+
+  Future<void> fetchPersonalizedMonitoringRecords()async{
+    var response = await _restAPI.get("/patient/monitoring/records/all", {});
+    if(response.success){
+      personalizedMonitoringRecords.clear();
+      personalizedMonitoringRecords.addAll((response.payload as List).map((e) => PersonalizedMonitoringRecord.fromJson(e)).toList());
+      update();
+    }else{
+      Get.snackbar("Failed to load detection history", "Restart app", backgroundColor: Colors.redAccent.shade400 );
+    }
+  }
 
 
 }
