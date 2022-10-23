@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:optum_hackathon/domain/controller/globalController.dart';
-import 'profile.dart';
 
 import 'alertPage.dart';
 import 'personalMonitoringPage.dart';
@@ -20,11 +17,11 @@ class NavPageState extends State<NavPage> {
     super.initState();
   }
   int currentIndex=0;
-  final screens = [
+  final screens = const[
     HomePage(),
     PersonalMonitoringPage(),
     AlertPage(),
-    ProfilePage(),
+    // ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) => SafeArea(
@@ -44,7 +41,7 @@ class NavPageState extends State<NavPage> {
           BottomNavigationBarItem(icon: Icon(Icons.home_rounded,), backgroundColor: Colors.red, label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.monitor_heart_outlined), backgroundColor: Colors.black87, label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.notifications_none_outlined), backgroundColor: Colors.black87, label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), backgroundColor: Colors.black87, label: "")
+          // BottomNavigationBarItem(icon: Icon(Icons.person_outline), backgroundColor: Colors.black87, label: "")
         ],
       ),
     ),

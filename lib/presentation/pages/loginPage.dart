@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:optum_hackathon/domain/controller/authController.dart';
-import 'package:optum_hackathon/presentation/components/button.dart';
+import '../../domain/controller/authController.dart';
+import '../../presentation/components/button.dart';
 
 
 class LoginPage extends StatelessWidget {

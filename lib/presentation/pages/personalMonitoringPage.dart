@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:optum_hackathon/domain/controller/globalController.dart';
-import 'package:optum_hackathon/domain/models/personalizedMonitoring.dart';
+import '../../domain/controller/globalController.dart';
+import '../../domain/models/personalizedMonitoring.dart';
 
 import '../components/dynamic_icons.dart';
 

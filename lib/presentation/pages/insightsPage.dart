@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:optum_hackathon/domain/controller/globalController.dart';
-import 'package:optum_hackathon/domain/models/insightsData.dart';
+import '../../domain/controller/globalController.dart';
+import '../../domain/models/insightsData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class InsightsPage extends StatefulWidget {

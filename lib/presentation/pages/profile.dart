@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
-import 'package:optum_hackathon/domain/controller/globalController.dart';
-import 'package:optum_hackathon/presentation/components/button.dart';
-import 'package:optum_hackathon/presentation/components/input_box.dart';
+import '../../domain/controller/globalController.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -28,16 +26,6 @@ class ProfilePage extends StatelessWidget {
                     subtitle: Text(controller.name.value, style: TextStyle(color: Colors.white.withOpacity(0.8)),),
                     contentPadding: EdgeInsets.zero,
                   ),
-                  ListTile(
-                    title: Text("E-mail", style: TextStyle(color: Colors.white),),
-                    subtitle: Text("test@test.com", style: TextStyle(color: Colors.white.withOpacity(0.8)),),
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                  ListTile(
-                    title: Text("Registered On", style: TextStyle(color: Colors.white),),
-                    subtitle: Text("12th January,2022", style: TextStyle(color: Colors.white.withOpacity(0.8)),),
-                    contentPadding: EdgeInsets.zero,
-                  )
                 ],
               ),
             ),
