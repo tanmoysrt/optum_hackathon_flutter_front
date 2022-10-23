@@ -32,7 +32,8 @@ class GlobalController extends GetxController{
       fetchLatestVitalData()
     })
     .then((value) => {
-      Timer.periodic(Duration(seconds: 5), (Timer t) => fetchLatestVitalData())
+      Timer.periodic(const Duration(seconds: 5), (Timer t) => fetchLatestVitalData()),
+      Timer.periodic(const Duration(seconds: 10), (Timer t) => fetchDetectionHistories())
     });
   }
 
