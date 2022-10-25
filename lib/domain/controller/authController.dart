@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
+import '../../presentation/components/button.dart';
 import '../../presentation/pages/fetchingVitalsDatabase.dart';
 import '../../presentation/pages/registrationPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -80,6 +81,7 @@ class AuthController extends GetxController {
     });
     // If successful, set token and move to homepage , also dispose editingcontrollers
     if(response.success){
+      isRequesting.value = false;
       Get.snackbar("Hurray ! 🎉🎉", "You have been logged in");
       _restAPI.setApiKey(response.payload["token"]);
       await _prefs.setString("token", response.payload["token"]);
@@ -164,6 +166,7 @@ class AuthController extends GetxController {
     });
 
     if(response.success){
+      isRequesting.value = false;
       Get.snackbar("Hurray ! 🎉🎉", response.message);
       _restAPI.setApiKey(response.payload["token"]);
       await _prefs.setString("token", response.payload["token"]);
@@ -183,5 +186,90 @@ class AuthController extends GetxController {
     }
 
     isRequesting.value = false;
+  }
+
+  Future<void> forgotPassword()async{
+    Get.showSnackbar(GetSnackBar(
+      title: "Requesting to reset password",
+      message: "Please wait...",
+      backgroundColor: Colors.blueAccent.shade400,
+      showProgressIndicator: true,
+      duration: const Duration(seconds: 2),
+    ));
+    if(emailController!.text.isEmpty){
+      Get.snackbar("Error", "Please enter your email");
+      return;
+    }
+    var response = await _restAPI.post("/auth/reset-password", {}, {
+      "email" : emailController!.text
+    });
+    if(response.success){
+      Get.snackbar("Hurray ! 🎉🎉", response.message);
+    }
+    else{
+      Get.snackbar("Failed to reset password 😢", response.message);
+    }
+  }
+
+  Future<void> showForgotPasswordForm()async{
+    Get.bottomSheet(
+      Container(
+        width: double.infinity,
+        color: Colors.black,
+        // height: 300,
+        padding: EdgeInsets.fromLTRB(20, 30, 20, MediaQuery.of(Get.context!).viewInsets.bottom),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 0),
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                      color: Color(0xff1E1E1E),
+                      borderRadius:
+                      BorderRadius.all(Radius.circular(2))),
+                  child: Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0),
+                    child: TextField(
+                      controller: emailController,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontFamily: 'Rounded'),
+                      keyboardType: TextInputType.text,
+                      cursorColor: const Color(0xff848484),
+                      decoration: const InputDecoration(
+                        hintText: 'Enter E-mail',
+                        hintStyle: TextStyle(
+                            color: Color(0xff848484),
+                            fontStyle: FontStyle.italic,
+                            fontFamily: 'Rounded'),
+                        border: InputBorder.none,
+                        focusColor: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              StyledButton(textInside: "Forgot password", onPressed: () {
+                Get.back();
+                forgotPassword();
+              }),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

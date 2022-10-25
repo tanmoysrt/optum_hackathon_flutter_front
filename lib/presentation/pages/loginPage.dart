@@ -129,6 +129,12 @@ class LoginPage extends StatelessWidget {
                         controller.goToRegistrationPage();
                       },
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextButton(onPressed: (){
+                      controller.showForgotPasswordForm();
+                    }, child: const Text("Forget password ?"))
                   ],
                 ),
               ),
