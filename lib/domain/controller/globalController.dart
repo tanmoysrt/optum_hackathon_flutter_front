@@ -1,12 +1,15 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:optum_hackathon/domain/controller/authController.dart';
 import 'package:optum_hackathon/domain/models/emergencyContacts.dart';
 import 'package:optum_hackathon/domain/models/insightsData.dart';
 import 'package:optum_hackathon/domain/models/personalizedMonitoring.dart';
 import 'package:optum_hackathon/presentation/components/button.dart';
 import 'package:optum_hackathon/presentation/pages/navPage.dart';
+import 'package:optum_hackathon/presentation/pages/splashPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/detectionHistory.dart';
@@ -30,6 +33,7 @@ class GlobalController extends GetxController {
   RxBool loadingPersonalizedRecords = false.obs;
   RxBool loadingVitalsInsightsData = false.obs;
   RxBool loadingEmergencyContactsData = false.obs;
+  RxBool sendingSOS = false.obs;
 
   // Textedit Controller for the addition of emergency contact
   TextEditingController nameController = TextEditingController();
@@ -369,5 +373,21 @@ class GlobalController extends GetxController {
         ),
         isDismissible: false,
     );
+  }
+
+  Future<void> sendSOS()async{
+    sendingSOS.value = true;
+    var response = await _restAPI.get("/patient/manage/contact/sos", {});
+    if(response.success){
+      Get.snackbar("SOS sent successfully", "Your emergency contacts will be notified");
+    }else{
+      Get.snackbar("Failed to send SOS", "Retry", backgroundColor: Colors.redAccent.shade400);
+    }
+    sendingSOS.value = false;
+  }
+
+  Future<void> logout()async{
+    await _prefs.clear();
+    await Get.offAll(() => const SplashPage());
   }
 }

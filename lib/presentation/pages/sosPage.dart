@@ -2,7 +2,6 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:optum_hackathon/domain/controller/globalController.dart';
 
 class SOSPage extends StatelessWidget {
@@ -16,6 +15,14 @@ class SOSPage extends StatelessWidget {
           appBar: AppBar(
             title: const Text("Manage Account"),
             backgroundColor: Colors.transparent,
+            actions: [
+              IconButton(
+                  onPressed: (){
+                    controller.logout();
+                  },
+                  icon: Icon(Icons.logout, color: Colors.grey.shade600,)
+              )
+            ],
           ),
           body: SingleChildScrollView(
             child: Container(
@@ -36,7 +43,7 @@ class SOSPage extends StatelessWidget {
                     repeatPauseDuration: const Duration(milliseconds: 100),
                     child: MaterialButton(
                       onPressed: () {
-                        print("SOS");
+                        controller.sendSOS();
                       },
                       elevation: 20.0,
                       shape: const CircleBorder(),
@@ -49,20 +56,36 @@ class SOSPage extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(120.0)),
-                            child: const Text(
-                              "SOS",
-                              style: TextStyle(
-                                  fontSize: 45.0,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors.blue),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const[
+                                 Text(
+                                  "SOS",
+                                  style: TextStyle(
+                                      fontSize: 45.0,
+                                      fontWeight: FontWeight.w800,
+                                      color: Colors.blue),
+                                ),
+                                Text(
+                                  "Tap to send",
+                                  style: TextStyle(
+                                      fontSize: 12.0,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blue),
+                                ),
+                              ],
                             ),
                           ),
-                          Positioned(
-                            top: 0,
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: CircularProgressIndicator(strokeWidth: 6, color: Colors.amber,),
+                          Visibility(
+                            visible: controller.sendingSOS.value,
+                            child: const Positioned(
+                              top: 0,
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: CircularProgressIndicator(strokeWidth: 6, color: Colors.amber,),
+                            ),
                           )
                         ],
                       ),
