@@ -43,6 +43,8 @@ dependencies:
   intl: ^0.17.0
   firebase_core: ^1.18.0
   firebase_messaging: ^11.2.6
+  avatar_glow: ^2.0.2
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:

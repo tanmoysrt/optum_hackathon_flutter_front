@@ -4,7 +4,6 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
 import '../../presentation/pages/fetchingVitalsDatabase.dart';
-import '../../presentation/pages/navPage.dart';
 import '../../presentation/pages/registrationPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,6 +19,7 @@ class AuthController extends GetxController {
   // Textediting controller
   TextEditingController? emailController;
   TextEditingController? passwordController;
+  TextEditingController? phoneNoController;
   TextEditingController? nameController;
   TextEditingController? ageController;
   TextEditingController? genderController;
@@ -54,6 +54,7 @@ class AuthController extends GetxController {
     } else {
       emailController = TextEditingController();
       passwordController = TextEditingController();
+      phoneNoController = TextEditingController();
       Get.offAll(LoginPage());
     }
   }
@@ -111,7 +112,7 @@ class AuthController extends GetxController {
   // Submit info for registration
   Future<void> submitRegistration()async{
     // Check all fields is filled
-    if(nameController!.text.isEmpty || ageController!.text.isEmpty || genderController!.text.isEmpty || heightController!.text.isEmpty || weightController!.text.isEmpty){
+    if(nameController!.text.isEmpty || emailController!.text.isEmpty || phoneNoController!.text.isEmpty  || ageController!.text.isEmpty || genderController!.text.isEmpty || heightController!.text.isEmpty || weightController!.text.isEmpty){
       Get.snackbar("Error", "Please fill all the fields",
           backgroundColor: Colors.red.shade400);
       return;

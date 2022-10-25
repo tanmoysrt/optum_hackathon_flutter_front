@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optum_hackathon/presentation/pages/sosPage.dart';
 
 import 'alertPage.dart';
 import 'personalMonitoringPage.dart';
@@ -21,6 +22,7 @@ class NavPageState extends State<NavPage> {
     HomePage(),
     PersonalMonitoringPage(),
     AlertPage(),
+    SOSPage()
     // ProfilePage(),
   ];
   @override
@@ -38,9 +40,10 @@ class NavPageState extends State<NavPage> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.grey.withOpacity(0.4),
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_rounded,), backgroundColor: Colors.red, label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.monitor_heart_outlined), backgroundColor: Colors.black87, label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications_none_outlined), backgroundColor: Colors.black87, label: ""),
+          BottomNavigationBarItem(icon: Icon(Icons.home_rounded,), backgroundColor: Colors.black87, label: "home"),
+          BottomNavigationBarItem(icon: Icon(Icons.monitor_heart_outlined), backgroundColor: Colors.black87, label: "monitoring"),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_none_outlined), backgroundColor: Colors.black87, label: "alerts"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), backgroundColor: Colors.black87, label: "account"),
           // BottomNavigationBarItem(icon: Icon(Icons.person_outline), backgroundColor: Colors.black87, label: "")
         ],
       ),

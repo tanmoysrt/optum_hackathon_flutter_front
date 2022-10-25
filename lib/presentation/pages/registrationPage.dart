@@ -91,6 +91,44 @@ class RegistrationPage extends StatelessWidget {
                                 SizedBox(
                                   height: screenHeight * 0.015,
                                 ),
+                                //PHone No
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.symmetric(horizontal: 0),
+                                  child: Container(
+                                    width: buttonWidth,
+                                    height: buttonHeight,
+                                    decoration: const BoxDecoration(
+                                        color: Color(0xff1E1E1E),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(2))),
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.symmetric(horizontal: 15.0),
+                                      child: TextField(
+                                        controller: controller.phoneNoController,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontFamily: 'Rounded'),
+                                        keyboardType: TextInputType.number,
+                                        cursorColor: const Color(0xff848484),
+                                        decoration: const InputDecoration(
+                                          hintText: 'Phone No',
+                                          hintStyle: TextStyle(
+                                              color: Color(0xff848484),
+                                              fontStyle: FontStyle.italic,
+                                              fontFamily: 'Rounded'),
+                                          border: InputBorder.none,
+                                          focusColor: Colors.grey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: screenHeight * 0.015,
+                                ),
                                 //Password
                                 Padding(
                                   padding:
